@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TaskController;
+use App\Http\Middleware\Authenticate;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -15,4 +16,4 @@ Route::post('login', [AuthController::class, 'login']);
 Route::prefix('/task')->group(function () {
     Route::get('/', [TaskController::class, 'index']);
     Route::post('/create', [TaskController::class, 'store']);
-})->middleware('auth:api');
+})->middleware(['auth', Authenticate::class]);
