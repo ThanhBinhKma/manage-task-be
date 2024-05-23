@@ -19,14 +19,13 @@ class TaskController extends BaseController
         return $this->sendResponse($response, 'User register successfully.');
     }
 
-    public function store(Request $request) {
-        dd(Auth::user());
+    public function store(Request $request)
+    {
         $task = [
             'name' => $request->name,
             'description' => $request->description,
             'user_id' => Auth::user()->id
         ];
-
         $createTask = Task::create($task);
 
         return $this->sendResponse($createTask, 'Task created successfully.');
